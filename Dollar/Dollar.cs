@@ -7,15 +7,18 @@
 
 public class Dollar
 {
-    public int Amount {get; set;}
+    // テストを通すための実装を行う
+    // 今回だとアサーションでAmountプロパティの値をテストしていたので初期値に期待結果を設定する
+    // テストがとったことが確認できたらリファクタリングを行ってまたテストが通るかを確認していく
+    public int Amount {get; set;}  // = 5 * 2;
     
     public Dollar(int amount)
     {
-
+        this.Amount = amount;
     }
 
-    public void times(int multiplier)
+    public Dollar times(int multiplier)
     {
-
+        return new Dollar(this.Amount *= multiplier);
     }
 }
