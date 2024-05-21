@@ -19,6 +19,6 @@ public class Dollar
 
     public Dollar times(int multiplier)
     {
-        return new Dollar(this.Amount *= multiplier);
+        return new Dollar(this.Amount * multiplier);
     }
 }
