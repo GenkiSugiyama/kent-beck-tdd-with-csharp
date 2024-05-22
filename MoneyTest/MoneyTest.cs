@@ -1,6 +1,7 @@
-using TDD.Dollar;
+using TDD.Money.Dollar;
+using TDD.Money.Franc;
 
-namespace MoneyTest;
+namespace TDD.Test.MoneyTest;
 
 [TestClass]
 public class MoneyTest
@@ -12,11 +13,24 @@ public class MoneyTest
         // 下記のようにとりあえずテストを書くとコンパイルエラーが発生する
         // まずはコンパイルエラーを解消するところから始める
         Dollar five = new Dollar(5);
-        Dollar product = five.times(2);
-        Assert.AreEqual(5, five.Amount);
-        Assert.AreEqual(10, product.Amount);
+        Assert.AreEqual<Dollar>(new Dollar(10), five.Times(2));
         
-        Dollar product2 = five.times(3);
-        Assert.AreEqual(15, product2.Amount);
+        Assert.AreEqual(new Dollar(15), five.Times(3));
+    }
+
+    [TestMethod]
+    public void TestEquality()
+    {
+        // 三角測量：テストがたまたま通ってしまうことをさけるために複数のテストケースを用意して実装を一般化させる
+        Assert.IsTrue(new Dollar(5).Equals(new Dollar(5)));
+        Assert.IsFalse(new Dollar(5).Equals(new Dollar(6)));
+    }
+
+    [TestMethod]
+    public void TestFrancMultiplication()
+    {
+        Franc five = new Franc(5);
+        Assert.AreEqual(new Franc(10), five.Times(2));
+        Assert.AreEqual(new Franc(15), five.Times(3));
     }
 }

@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dollar\Dollar.csproj" />
+    <ProjectReference Include="..\Franc\Franc.csproj" />
   </ItemGroup>
 
 </Project>
