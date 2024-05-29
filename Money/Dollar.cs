@@ -2,13 +2,10 @@
 
 public class Dollar : Money
 {
-    public Dollar(int amount)
-    {
-       base.Amount = amount;
-    }
+    public Dollar(int amount, string currency): base(amount, currency) { }
 
     public override Money Times(int multiplier)
     {
-        return new Dollar(base.Amount * multiplier);
+        return Money.IssueDollar(this.Amount * multiplier);
     }
 }

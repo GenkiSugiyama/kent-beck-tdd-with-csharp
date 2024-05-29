@@ -1,3 +1,5 @@
+using System.Runtime;
+using System.Runtime.CompilerServices;
 using TDD = TDD.Money;
 
 namespace TDD.Test.MoneyTest;
@@ -34,5 +36,13 @@ public class MoneyTest
         TDD::Money five = TDD::Money.IssueFranc(5);
         Assert.AreEqual(TDD::Money.IssueFranc(10), five.Times(2));
         Assert.AreEqual(TDD::Money.IssueFranc(15), five.Times(3));
+    }
+
+    [TestMethod]
+    public void TestCurrency()
+    {
+        Assert.AreEqual("USD", TDD::Money.IssueDollar(1).GetCurrency());
+        Assert.AreEqual("CHF", TDD::Money.IssueFranc(1).GetCurrency());
+
     }
 }
