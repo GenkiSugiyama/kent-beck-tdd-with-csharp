@@ -1,5 +1,7 @@
+using System.ComponentModel.DataAnnotations;
 using System.Runtime;
 using System.Runtime.CompilerServices;
+using NuGet.Frameworks;
 using TDD = TDD.Money;
 
 namespace TDD.Test.MoneyTest;
@@ -43,6 +45,11 @@ public class MoneyTest
     {
         Assert.AreEqual("USD", TDD::Money.IssueDollar(1).GetCurrency());
         Assert.AreEqual("CHF", TDD::Money.IssueFranc(1).GetCurrency());
+    }
 
+    [TestMethod]
+    public void TestDifferentClassEquality()
+    {
+        Assert.IsTrue(new TDD::Money(10, "CHF").Equals( new TDD::Franc(10, "CHF")));
     }
 }
