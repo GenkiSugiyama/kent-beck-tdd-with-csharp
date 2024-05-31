@@ -22,19 +22,24 @@ public class Money
         return this.Currency;
     }
 
+    public Money Plus(Money money)
+    {
+        return new Money(this.Amount + money.Amount, this.Currency);
+    }
+
     public override bool Equals(object? obj)
     {
         Money money = (Money)obj;
         return this.Amount == money.Amount && this.Currency.Equals(money.Currency);
     }
 
-    public static Dollar IssueDollar(int amount)
+    public static Money IssueDollar(int amount)
     {
-        return new Dollar(amount, "USD");
+        return new Money(amount, "USD");
     }
 
-    public static Franc IssueFranc(int amount)
+    public static Money IssueFranc(int amount)
     {
-        return new Franc(amount, "CHF");
+        return new Money(amount, "CHF");
     }
 }
