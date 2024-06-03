@@ -13,24 +13,24 @@ public class Money
         this.Currency = currency;
     }
 
+    public override bool Equals(object? obj)
+    {
+        Money money = (Money)obj;
+        return this.Amount == money.Amount && this.Currency.Equals(money.Currency);
+    }
+
     public Money Times(int multiplier){
         return new Money(this.Amount * multiplier, this.Currency);
+    }
+    
+    public Money Plus(Money addend)
+    {
+        return new Money(this.Amount + addend.Amount, this.Currency);
     }
 
     public string GetCurrency()
     {
         return this.Currency;
-    }
-
-    public Money Plus(Money money)
-    {
-        return new Money(this.Amount + money.Amount, this.Currency);
-    }
-
-    public override bool Equals(object? obj)
-    {
-        Money money = (Money)obj;
-        return this.Amount == money.Amount && this.Currency.Equals(money.Currency);
     }
 
     public static Money IssueDollar(int amount)
