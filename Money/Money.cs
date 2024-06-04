@@ -2,7 +2,7 @@
 
 // 同じ基底クラスを継承する複数のサブクラスがあり、それぞれが似通っているかつあまり力を持っていない場合極力サブクラスは消したほうがよい？
 // 消していくためには実装を寄せていき、完全一致したものから基底クラスに移動、サブクラス側は削除していく
-public class Money
+public class Money : Expression
 {
     protected int Amount { get; set;}
     protected string Currency { get; set;}
@@ -23,7 +23,7 @@ public class Money
         return new Money(this.Amount * multiplier, this.Currency);
     }
     
-    public Money Plus(Money addend)
+    public Expression Plus(Money addend)
     {
         return new Money(this.Amount + addend.Amount, this.Currency);
     }

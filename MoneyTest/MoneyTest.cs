@@ -1,5 +1,7 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Data.SqlTypes;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime;
 using System.Runtime.CompilerServices;
@@ -42,7 +44,10 @@ public class MoneyTest
     [TestMethod]
     public void TestSimpleAddition()
     {
-        TDD::Money sum = TDD::Money.IssueDollar(5).Plus(TDD::Money.IssueDollar(5));
-        Assert.AreEqual(TDD::Money.IssueDollar(10), sum);
+        TDD::Money five = TDD::Money.IssueDollar(5);
+        TDD::Expression sum = five.Plus(five);
+        Bank bank = new Bank();
+        TDD::Money reduced = bank.Reduce(sum, "USD");
+        Assert.AreEqual(TDD::Money.IssueDollar(10), reduced);
     }
 }
