@@ -4,8 +4,8 @@
 // 消していくためには実装を寄せていき、完全一致したものから基底クラスに移動、サブクラス側は削除していく
 public class Money : Expression
 {
-    protected int Amount { get; set;}
-    protected string Currency { get; set;}
+    public int Amount { get; set;}
+    public string Currency { get; set;}
 
     public Money(int amount, string currency)
     {
@@ -25,7 +25,12 @@ public class Money : Expression
     
     public Expression Plus(Money addend)
     {
-        return new Money(this.Amount + addend.Amount, this.Currency);
+        return new Sum(this, addend);
+    }
+
+    public Money Reduce(string to)
+    {
+        return this;
     }
 
     public string GetCurrency()

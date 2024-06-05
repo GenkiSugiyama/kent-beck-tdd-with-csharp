@@ -1,10 +1,19 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Common;
 using System.Data.SqlTypes;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Tracing;
+using System.IO.Enumeration;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks.Dataflow;
+using Microsoft.VisualStudio.TestPlatform.Common.Utilities;
+using Microsoft.VisualStudio.TestPlatform.ObjectModel;
+using Microsoft.VisualStudio.TestPlatform.PlatformAbstractions.Interfaces;
 using NuGet.Frameworks;
 using TDD.Money;
 using TDD = TDD.Money;
@@ -49,5 +58,32 @@ public class MoneyTest
         Bank bank = new Bank();
         TDD::Money reduced = bank.Reduce(sum, "USD");
         Assert.AreEqual(TDD::Money.IssueDollar(10), reduced);
+    }
+
+    [TestMethod]
+    public void TestPlusReturnSum()
+    {
+        TDD::Money five = TDD::Money.IssueDollar(5);
+        TDD::Expression result = five.Plus(five);
+        Sum sum = (Sum)result;
+        Assert.AreEqual(five, sum.Augend);
+        Assert.AreEqual(five, sum.Addend);
+    }
+
+    [TestMethod]
+    public void TestReduceSum()
+    {
+        TDD::Expression sum = new Sum(TDD::Money.IssueDollar(3), TDD::Money.IssueDollar(4));
+        Bank bank = new Bank();
+        TDD::Money result = bank.Reduce(sum, "USD");
+        Assert.AreEqual(TDD::Money.IssueDollar(7), result); 
+    }
+
+    [TestMethod]
+    public void TestReduceMoney()
+    {
+        Bank bank = new Bank();
+        TDD::Money result = bank.Reduce(TDD::Money.IssueDollar(1), "USD");
+        Assert.AreEqual(TDD::Money.IssueDollar(1), result);
     }
 }
