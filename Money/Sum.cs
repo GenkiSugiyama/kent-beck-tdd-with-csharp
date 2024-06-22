@@ -11,7 +11,7 @@ public class Sum : Expression
         this.Addend = addend;
     }
 
-    public Money Reduce(String to)
+    public Money Reduce(Bank bank, String to)
     {
         int amount = this.Augend.Amount + this.Addend.Amount;
         return new Money(amount, to);

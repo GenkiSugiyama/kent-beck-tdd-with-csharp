@@ -86,4 +86,20 @@ public class MoneyTest
         TDD::Money result = bank.Reduce(TDD::Money.IssueDollar(1), "USD");
         Assert.AreEqual(TDD::Money.IssueDollar(1), result);
     }
+
+    // フラン ：ドル = 2 : 1 テスト
+    [TestMethod]
+    public void TestReduceMoneyDifferentCurrency()
+    {
+        Bank bank = new Bank();
+        bank.AddRate("CHF", "USD", 2);
+        TDD::Money result = bank.Reduce(TDD::Money.IssueFranc(2), "USD");
+        Assert.AreEqual(TDD::Money.IssueDollar(1), result);
+    }
+
+    [TestMethod]
+    public void TestIdentityRate()
+    {
+        Assert.AreEqual(1, new Bank().Rate("USD", "USD"));
+    }
 }

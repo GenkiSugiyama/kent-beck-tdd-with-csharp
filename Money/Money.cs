@@ -28,9 +28,11 @@ public class Money : Expression
         return new Sum(this, addend);
     }
 
-    public Money Reduce(string to)
+    public Money Reduce(Bank bank, string to)
     {
-        return this;
+        //return this;
+        int rate = bank.Rate(this.Currency, to);
+        return new Money(this.Amount / rate, to);
     }
 
     public string GetCurrency()
